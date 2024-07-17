@@ -1,12 +1,15 @@
 /*
 Loading the .env file and creates environment variables from it
 */
-require("dotenv").config();
-const mongoose = require("mongoose");
-const names = require("./names.json");
-const levels = require("./levels.json");
-const positions = require("./positions.json");
-const EmployeeModel = require("../db/employee.model");
+//require("dotenv").config();
+import { connect, disconnect } from "mongoose";
+import names from "./names.json" assert {type: "json"};
+import levels from "./levels.json" assert { type: "json" };
+import positions from "./positions.json" assert { type: "json" };
+import EmployeeSchema from "../db/employee.model.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL;
 
@@ -18,7 +21,7 @@ if (!mongoUrl) {
 const pick = (from) => from[Math.floor(Math.random() * (from.length - 0))];
 
 const populateEmployees = async () => {
-  await EmployeeModel.deleteMany({});
+  await EmployeeSchema.deleteMany({});
 
   const employees = names.map((name) => ({
     name,
@@ -26,16 +29,16 @@ const populateEmployees = async () => {
     position: pick(positions),
   }));
 
-  await EmployeeModel.create(...employees);
+  await EmployeeSchema.create(...employees);
   console.log("Employees created");
 };
 
 const main = async () => {
-  await mongoose.connect(mongoUrl);
+  await connect(mongoUrl);
 
   await populateEmployees();
 
-  await mongoose.disconnect();
+  await disconnect();
 };
 
 main().catch((error) => {
