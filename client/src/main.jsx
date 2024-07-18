@@ -11,6 +11,7 @@ import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import "./main.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
+import EquipmentList from "./Pages/EquipmentList";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/equipments",
-          element: <></>
+          element: <EquipmentList />
         },
         {
           path: "/equipments/create",
