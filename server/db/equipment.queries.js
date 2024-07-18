@@ -16,3 +16,6 @@ export async function deleteEquipment(id) {
   return await Equipment.findByIdAndDelete(id)
 }
 
+export async function createEquipment(equipment) {
+  return await Equipment.create(equipment)
+}

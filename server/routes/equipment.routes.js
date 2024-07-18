@@ -12,6 +12,15 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+router.post("/", async (req, res, next) => {
+    try {
+        const created = await equipmetQueries.createEquipment(req.body)
+        res.json(created)
+    } catch (err) {
+        errorCase(req, err, next)
+    }
+})
+
 router.patch("/:id", async (req, res, next) => {
     try {
         const updated = await equipmetQueries.updateEquipment(req.params.id, req.body)
