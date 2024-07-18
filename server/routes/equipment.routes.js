@@ -33,3 +33,5 @@ function errorCase(req, err, next) {
     };
     next();
 }
+
+export default router;

@@ -100,4 +100,12 @@ button {
 
 .grow {
   flex: 1;
+  text-align: left;
+  justify-content: left;
+}
+
+nav > ul > li {
+  flex: 3;
+  text-align: right;
+  justify-content: right;
 }
