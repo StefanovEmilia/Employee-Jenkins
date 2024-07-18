@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import Layout from "./Pages/Layout";
 import ErrorPage from "./Pages/ErrorPage";
@@ -13,34 +13,46 @@ import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/",
-        element: <EmployeeList />,
-      },
-      {
-        path: "/create",
-        element: <EmployeeCreator />,
-      },
-      {
-        path: "/update/:id",
-        element: <EmployeeUpdater />,
-      },
-      {
-        path: "/table-test",
-        element: <TableTest />,
-      },
-      {
-        path: "/form-test",
-        element: <FormTest />,
-      },
-    ],
-  },
-]);
+    {
+      path: "/",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/",
+          element: <EmployeeList />,
+        },
+        {
+          path: "/create",
+          element: <EmployeeCreator />,
+        },
+        {
+          path: "/update/:id",
+          element: <EmployeeUpdater />,
+        },
+        {
+          path: "/table-test",
+          element: <TableTest />,
+        },
+        {
+          path: "/form-test",
+          element: <FormTest />,
+        },
+        {
+          path: "/equipments",
+          element: <></>
+        },
+        {
+          path: "/equipments/create",
+          element: <></>
+        },
+        {
+          path: "/equipments/update",
+          element: <></>
+        }
+      ],
+    },
+  ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
