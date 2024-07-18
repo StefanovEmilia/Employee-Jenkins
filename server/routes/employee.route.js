@@ -34,6 +34,19 @@ router.get("/:id", async (req, res, next) => {
     }  
 });
 
+router.get("/:search", async (req, res, next) => {
+  try {
+    const employees = await eQueries.getEmployeeByName(req.params.search)
+    res.json(employees)
+  } catch (err) {
+    req.errorMessage = {
+      message: "Cannot find employees with the given name",
+      error: err
+    }
+    next()
+  }
+})
+
 router.post("/", async (req, res, next) => {
   const employee = req.body;
 

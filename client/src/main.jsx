@@ -7,6 +7,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
+import Employees from "./Pages/Employees";
 
 import "./main.css";
 import TableTest from "./Pages/TableTest";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         {
           path: "/",
           element: <EmployeeList />,
+        },
+        {
+          path: "/employees/:search",
+          element: <Employees />
         },
         {
           path: "/create",

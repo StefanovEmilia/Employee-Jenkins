@@ -8,6 +8,10 @@ export async function getEmployeeById(id) {
     return await Employee.findById(id);
 }
 
+export async function getEmployeeByName(name) {
+    return await Employee.find({name: {$regex: `^${name}`, $options: "i"}})
+}
+
 export async function getEmployeesByParam(param = {}) {
     return await Employee.find({ ...param }).sort({created: "desc"})
 }

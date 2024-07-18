@@ -11,6 +11,12 @@ const EmployeeSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  equipments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Equipment",
+    },
+  ],
 });
 
 export default model("Employee", EmployeeSchema);
