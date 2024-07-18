@@ -2,6 +2,7 @@
 import express from "express";
 import { connect } from "mongoose";
 import employeeRoutes from "./routes/employee.route.js";
+import equipmentRoutes from "./routes/equipment.routes.js"
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -17,6 +18,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/employees", employeeRoutes)
+app.use("/api/equipments", equipmentRoutes)
 
 const main = async () => {
   await connect(MONGO_URL);

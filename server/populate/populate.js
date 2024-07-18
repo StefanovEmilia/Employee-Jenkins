@@ -6,7 +6,11 @@ import { connect, disconnect } from "mongoose";
 import names from "./names.json" assert {type: "json"};
 import levels from "./levels.json" assert { type: "json" };
 import positions from "./positions.json" assert { type: "json" };
+import eqnames from "./eqnames.json" assert {type: "json"};
+import amounts from "./amounts.json" assert {type: "json"};
+import types from "./types.json" assert {type: "json"};
 import EmployeeSchema from "../db/employee.model.js";
+import EquipmentSchema from "../db/equipment.model.js"
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -33,10 +37,24 @@ const populateEmployees = async () => {
   console.log("Employees created");
 };
 
+const populateEquipments = async () => {
+  await EquipmentSchema.deleteMany({})
+
+  const equipments = eqnames.map((eq) => ({
+    name: eq, 
+    amount: pick(amounts),
+    type: pick(types)
+  }))
+
+  await EquipmentSchema.create(...equipments);
+  console.log("Equipments created")
+}
+
 const main = async () => {
   await connect(mongoUrl);
 
   await populateEmployees();
+  await populateEquipments();
 
   await disconnect();
 };
