@@ -21,6 +21,15 @@ router.patch("/:id", async (req, res, next) => {
     }
 })
 
+router.delete("/:id", async (req, res, next) => {
+    try {
+        const deleted = await equipmetQueries.deleteEquipment(req.params.id)
+        res.json(deleted)
+    } catch (err) {
+        errorCase(req, err, next)
+    }
+})
+
 router.use("*", (req, res) => {
   console.log(req.errorMessage.error);
   res.json({ error: req.errorMessage.message });

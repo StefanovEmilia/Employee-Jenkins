@@ -12,3 +12,7 @@ export async function updateEquipment(id, data) {
   );
 }
 
+export async function deleteEquipment(id) {
+  return await Equipment.findByIdAndDelete(id)
+}
+
