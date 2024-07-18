@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import "./EmployeeData.css"
 import Loading from "../Loading";
 
 const EmployeeData = ({ employee }) => {
@@ -26,41 +27,26 @@ const EmployeeData = ({ employee }) => {
     }, [])
 
     return (
-      <div>
-        <table>
-          <thead>
-            <th>Name</th>
-            <th>Level</th>
-            <th>Position</th>
-            <th>Equipments</th>
-            <th></th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{employee.name}</td>
-              <td>{employee.level}</td>
-              <td>{employee.position}</td>
-              <td>
-                {equipmentLoading ? (
-                  <Loading />
-                ) : equipments ? (
-                  equipments.map((equipment, index) => (
-                    <div key={index}>
-                      {equipment.name}: {equipment.type}
-                    </div>
-                  ))
-                ) : (
-                  <div>No equipment</div>
-                )}
-              </td>
-              <td>
-                <Link to={`/update/${employee._id}`}>
-                  <button type="button">Update</button>
-                </Link>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="employeedata">
+        <h1>{employee.name}</h1>
+        <h3>
+          {employee.level} {employee.position}
+        </h3>
+        <h3>Equipments:</h3>
+        {equipmentLoading ? (
+          <Loading />
+        ) : equipments ? (
+          equipments.map((equipment, index) => (
+            <div key={index}>
+              {equipment.name}: {equipment.type}
+            </div>
+          ))
+        ) : (
+          <div>No equipment</div>
+        )}
+        <Link to={`/update/${employee._id}`}>
+          <button type="button">Update</button>
+        </Link>
       </div>
     );
 }
