@@ -109,3 +109,11 @@ nav > ul > li {
   text-align: right;
   justify-content: right;
 }
+
+.employees {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: rgb(198, 218, 255);;
+}

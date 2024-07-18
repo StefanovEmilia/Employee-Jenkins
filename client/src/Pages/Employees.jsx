@@ -30,10 +30,7 @@ const Employees = () => {
 
     return (
       <div>
-        <Link to="/">
-          <button type="button">Back</button>
-        </Link>
-        <div class="EmployeeTable">
+        <div class="employees">
           {employees && Array.isArray(employees) ? (
             employees.map((employee) => <EmployeeData employee={employee} />)
           ) : (
