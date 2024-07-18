@@ -12,6 +12,15 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+router.get("/:id", async (req, res, next) => {
+    try {
+        const equipment = await equipmetQueries.getEquipmentByID(req.params.id)
+        res.json(equipment)
+    } catch (err) {
+        errorCase(req, err, next)
+    }
+})
+
 router.post("/", async (req, res, next) => {
     try {
         const created = await equipmetQueries.createEquipment(req.body)

@@ -19,3 +19,7 @@ export async function deleteEquipment(id) {
 export async function createEquipment(equipment) {
   return await Equipment.create(equipment)
 }
+
+export async function getEquipmentByID(id) {
+  return await Equipment.findById(id)
+}

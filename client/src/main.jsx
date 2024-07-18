@@ -12,6 +12,8 @@ import "./main.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
 import EquipmentList from "./Pages/EquipmentList";
+import EquipmentCreator from "./Pages/EquipmentCreator";
+import EquipmentUpdater from "./Pages/EquipmentUpdater";
 
 const router = createBrowserRouter([
     {
@@ -45,11 +47,11 @@ const router = createBrowserRouter([
         },
         {
           path: "/equipments/create",
-          element: <></>
+          element: <EquipmentCreator />
         },
         {
-          path: "/equipments/update",
-          element: <></>
+          path: "/equipments/update/:id",
+          element: <EquipmentUpdater />
         }
       ],
     },
