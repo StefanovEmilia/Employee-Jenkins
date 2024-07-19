@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EmployeeForm from "../Components/EmployeeForm";
 
@@ -15,6 +15,7 @@ const createEmployee = (employee) => {
 const EmployeeCreator = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [equipments, setEquipments] = useState([])
 
   const handleCreateEmployee = (employee) => {
     setLoading(true);
@@ -26,11 +27,21 @@ const EmployeeCreator = () => {
       })
   };
 
+  useEffect(() => {
+    const fetchEquipments = async () => {
+      const response = await fetch("/api/equipments");
+      const equipments = await response.json();
+      setEquipments(equipments);
+    };
+    fetchEquipments()
+  }, [])
+
   return (
     <EmployeeForm
       onCancel={() => navigate("/")}
       disabled={loading}
       onSave={handleCreateEmployee}
+      eqlist={equipments}
     />
   );
 };

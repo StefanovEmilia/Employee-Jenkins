@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
+const EmployeeForm = ({ onSave, disabled, employee, onCancel, eqlist }) => {
   const [name, setName] = useState(employee?.name ?? "");
   const [level, setLevel] = useState(employee?.level ?? "");
   const [position, setPosition] = useState(employee?.position ?? "");
+  const [equipments, setEquipments] = useState(employee?.equipments ?? [])
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +15,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         name,
         level,
         position,
+        equipments
       });
     }
 
@@ -21,7 +23,17 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       name,
       level,
       position,
+      equipments
     });
+  };
+
+  const handleEquipmentChange = (e) => {
+    const value = e.target.value;
+    setEquipments((prev) =>
+      prev.includes(value)
+        ? prev.filter((id) => id !== value)
+        : [...prev, value]
+    );
   };
 
   return (
@@ -54,6 +66,22 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           name="position"
           id="position"
         />
+      </div>
+
+      <div className="control">
+        {eqlist.map((eq) => (
+          <div key={eq._id}>
+            <label htmlFor={eq._id}>{eq.name}</label>
+            <input
+              value={eq._id}
+              onChange={handleEquipmentChange}
+              name={eq.name}
+              id={eq._id}
+              type="checkbox"
+              checked={equipments.includes(eq._id)}
+            />
+          </div>
+        ))}
       </div>
 
       <div className="buttons">

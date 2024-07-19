@@ -25,14 +25,21 @@ const EmployeeUpdater = () => {
   const [employee, setEmployee] = useState(null);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [employeeLoading, setEmployeeLoading] = useState(true);
+  const [equipments, setEquipments] = useState([])
 
   useEffect(() => {
+    const fetchEquipments = async () => {
+      const response = await fetch("/api/equipments")
+      const equipments = await response.json()
+      setEquipments(equipments)
+    }
     setEmployeeLoading(true);
     fetchEmployee(id)
       .then((employee) => {
         setEmployee(employee);
         setEmployeeLoading(false);
       });
+    fetchEquipments()
   }, [id]);
 
   const handleUpdateEmployee = (employee) => {
@@ -53,6 +60,7 @@ const EmployeeUpdater = () => {
       employee={employee}
       onSave={handleUpdateEmployee}
       disabled={updateLoading}
+      eqlist = {equipments}
       onCancel={() => navigate("/")}
     />
   );
