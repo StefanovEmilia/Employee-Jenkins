@@ -39,7 +39,7 @@ const EmployeeList = ({attended, setAttended}) => {
       employee[e.target.name].toLowerCase().startsWith(e.target.value)
     );
     if (filteredEmployees.length === 0) {
-      setFilteredEmployees(null);
+      setFilteredEmployees([]);
       return;
     }
     setFilteredEmployees(filteredEmployees);

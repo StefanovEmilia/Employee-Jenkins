@@ -15,7 +15,13 @@ const EmployeeTable = ({ employees, onDelete, setOrderBy, attended, setAttended,
   
   return (
     <>
-      {deleteEmployee && <ConfirmPopup onDelete={deleteEmployee.onDelete} id={deleteEmployee.id} setDeleteEmployee={setDeleteEmployee } />}
+      {deleteEmployee && (
+        <ConfirmPopup
+          onDelete={deleteEmployee.onDelete}
+          id={deleteEmployee.id}
+          setDeleteEmployee={setDeleteEmployee}
+        />
+      )}
       <div className="EmployeeTable">
         <table>
           <thead>
@@ -75,29 +81,47 @@ const EmployeeTable = ({ employees, onDelete, setOrderBy, attended, setAttended,
             </tr>
           </thead>
           <tbody>
-            {employees?.map((employee) => (
-              <tr key={employee._id}>
-                <td>{employee.name}</td>
-                <td>{employee.level}</td>
-                <td>{employee.position}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={attended?.includes(employee._id)}
-                    value={employee._id}
-                    onChange={handleChange}
-                  />
-                </td>
-                <td>
-                  <Link to={`/update/${employee._id}`}>
-                    <button type="button">Update</button>
-                  </Link>
-                  <button type="button" onClick={() => setDeleteEmployee({onDelete:onDelete, id:employee._id})}>
-                    Delete
-                  </button>
-                </td>
+            {employees.length > 0 ? (
+              employees.map((employee) => (
+                <tr key={employee._id}>
+                  <td>{employee.name}</td>
+                  <td>{employee.level}</td>
+                  <td>{employee.position}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={attended?.includes(employee._id)}
+                      value={employee._id}
+                      onChange={handleChange}
+                    />
+                  </td>
+                  <td>
+                    <Link to={`/update/${employee._id}`}>
+                      <button type="button">Update</button>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setDeleteEmployee({
+                          onDelete: onDelete,
+                          id: employee._id,
+                        })
+                      }
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td></td>
+                <td></td>
+                <td>Cannot find anything!</td>
+                <td></td>
+                <td></td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
