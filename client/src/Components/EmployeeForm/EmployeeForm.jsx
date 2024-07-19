@@ -71,7 +71,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, eqlist }) => {
       <div className="control">
         {eqlist.map((eq) => (
           <div key={eq._id}>
-            <label htmlFor={eq._id}>{eq.name}</label>
+            <label htmlFor={eq._id}>{eq.name} ({eq.type})</label>
             <input
               value={eq._id}
               onChange={handleEquipmentChange}

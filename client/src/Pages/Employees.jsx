@@ -32,7 +32,7 @@ const Employees = () => {
       <div>
         <div class="employees">
           {employees && Array.isArray(employees) ? (
-            employees.map((employee) => <EmployeeData employee={employee} />)
+            employees.map((employee) => <EmployeeData key={employee._id } employee={employee} />)
           ) : (
             <ErrorPage search={search} />
           )}
