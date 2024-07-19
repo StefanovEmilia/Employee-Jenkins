@@ -32,6 +32,10 @@ const router = (props) => createBrowserRouter([
         element: <Employees />
       },
       {
+        path: "/missing",
+        element: <EmployeeList attended={props.attended} setAttended={props.setAttended} />
+      },
+      {
         path: "/create",
         element: <EmployeeCreator />,
       },

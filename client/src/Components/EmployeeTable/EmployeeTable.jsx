@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 
-const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, attended, setAttended }) => {
+const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, attended, setAttended, setMissings }) => {
 
   const handleInput = (e) => {
     if (e.target.value === '') {
@@ -19,6 +19,7 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
   const handleChange = (e) => {
     const value = e.target.value
     setAttended(prev => prev.includes(value) ? prev.filter(id => id !== value) : [...prev, value])
+    setMissings((prev) => prev.filter((id) => id !== value));
   }
   
   return (
@@ -45,7 +46,7 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
                 onChange={handleInput}
               />
             </th>
-            <th>Attendance:</th>
+            <th>Attendance: <Link to="/missing"><button type="button">Who's missing?</button></Link></th>
             <th>
               Order by:
               <select
@@ -65,7 +66,7 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {employees?.map((employee) => (
             <tr key={employee._id}>
               <td>{employee.name}</td>
               <td>{employee.level}</td>
