@@ -30,13 +30,17 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
         <thead>
           <tr>
             <th>
-              Name <input id="searchname" type="text" placeholder="Search by name" onChange={(e) => setSearch(e.target.value)} />
+              Name
+              <input id="searchname"
+                type="text"
+                placeholder="Search by name"
+                onChange={(e) => setSearch(e.target.value)} />
               <Link to={"/employees/" + search}>
                 <button type="button">Search!</button>
               </Link>
             </th>
             <th>
-              Level{" "}
+              Level
               <input
                 type="text"
                 name="level"
@@ -45,7 +49,7 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
               />
             </th>
             <th>
-              Position{" "}
+              Position
               <input
                 type="text"
                 name="position"
