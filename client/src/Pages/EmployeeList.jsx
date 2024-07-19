@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
-import EmployeeTable from "../Components/EmployeeTable";
+import TablePagination from "../Components/TablePagination";
 import { useLocation } from "react-router-dom";
 
 const fetchEmployees = () => {
@@ -117,7 +117,7 @@ const EmployeeList = ({attended, setAttended}) => {
   }
 
   return ( 
-    <EmployeeTable
+    <TablePagination
       employees={path === "/missing" ? missings : filteredEmployees ? filteredEmployees : employees}
       onDelete={handleDelete}
       setFilteredEmployees={setFilteredEmployees}
