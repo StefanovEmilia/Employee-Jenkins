@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
+import { useState } from "react";
 
 const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, attended, setAttended, setMissings }) => {
+  const [search, setSearch] = useState(null)
 
   const handleInput = (e) => {
     if (e.target.value === '') {
@@ -27,7 +29,12 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>
+              Name <input id="searchname" type="text" placeholder="Search by name" onChange={(e) => setSearch(e.target.value)} />
+              <Link to={"/employees/" + search}>
+                <button type="button">Search!</button>
+              </Link>
+            </th>
             <th>
               Level{" "}
               <input
@@ -46,7 +53,12 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
                 onChange={handleInput}
               />
             </th>
-            <th>Attendance: <Link to="/missing"><button type="button">Who's missing?</button></Link></th>
+            <th>
+              Attendance:{" "}
+              <Link to="/missing">
+                <button type="button">Who's missing?</button>
+              </Link>
+            </th>
             <th>
               Order by:
               <select
@@ -71,7 +83,14 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, 
               <td>{employee.name}</td>
               <td>{employee.level}</td>
               <td>{employee.position}</td>
-              <td><input type="checkbox" checked={attended?.includes(employee._id)} value={employee._id} onChange={ handleChange} /></td>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={attended?.includes(employee._id)}
+                  value={employee._id}
+                  onChange={handleChange}
+                />
+              </td>
               <td>
                 <Link to={`/update/${employee._id}`}>
                   <button type="button">Update</button>
