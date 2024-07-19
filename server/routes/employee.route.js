@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   return res.json(employees);
 });
 
-router.get("/superheroes", async (req, res) => {
+router.get("/superheroes", async (req, res, next) => {
     try {
         const superheroes = await eQueries.getEmployeesByParam({ position: "Superhero" })
         res.json(superheroes)
