@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 
-const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy }) => {
+const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, attended, setAttended }) => {
 
   const handleInput = (e) => {
     if (e.target.value === '') {
@@ -15,17 +15,44 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy }
     }
     setFilteredEmployees(filteredEmployees)
   }
+
+  const handleChange = (e) => {
+    const value = e.target.value
+    setAttended(prev => prev.includes(value) ? prev.filter(id => id !== value) : [...prev, value])
+  }
   
   return (
-  <div className="EmployeeTable">
+    <div className="EmployeeTable">
       <table>
         <thead>
           <tr>
             <th>Name</th>
-            <th>Level <input type="text" name="level" placeholder="filter by level" onChange={handleInput} /></th>
-            <th>Position <input type="text" name="position" placeholder="filter by position" onChange={handleInput} /></th>
-            <th>Order by:
-              <select onChange={(e) => { setOrderBy(e.target.value) }}>
+            <th>
+              Level{" "}
+              <input
+                type="text"
+                name="level"
+                placeholder="filter by level"
+                onChange={handleInput}
+              />
+            </th>
+            <th>
+              Position{" "}
+              <input
+                type="text"
+                name="position"
+                placeholder="filter by position"
+                onChange={handleInput}
+              />
+            </th>
+            <th>Attendance:</th>
+            <th>
+              Order by:
+              <select
+                onChange={(e) => {
+                  setOrderBy(e.target.value);
+                }}
+              >
                 <option>Select order</option>
                 <option value="name">Name</option>
                 <option value="first">First Name</option>
@@ -33,7 +60,8 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy }
                 <option value="middle">Middle Name</option>
                 <option value="position">Position</option>
                 <option value="level">Level</option>
-            </select></th>
+              </select>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +70,7 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy }
               <td>{employee.name}</td>
               <td>{employee.level}</td>
               <td>{employee.position}</td>
+              <td><input type="checkbox" checked={attended?.includes(employee._id)} value={employee._id} onChange={ handleChange} /></td>
               <td>
                 <Link to={`/update/${employee._id}`}>
                   <button type="button">Update</button>
@@ -54,8 +83,8 @@ const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy }
           ))}
         </tbody>
       </table>
-    </div> 
-  )
+    </div>
+  );
 };
 
 export default EmployeeTable;

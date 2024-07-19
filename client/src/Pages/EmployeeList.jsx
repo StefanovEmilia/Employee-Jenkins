@@ -12,7 +12,7 @@ const deleteEmployee = (id) => {
   );
 };
 
-const EmployeeList = () => {
+const EmployeeList = ({attended, setAttended}) => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
   const [filteredEmployees, setFilteredEmployees] = useState(null)
@@ -108,6 +108,8 @@ const EmployeeList = () => {
       onDelete={handleDelete}
       setFilteredEmployees={setFilteredEmployees}
       setOrderBy={setOrderBy}
+      attended={attended}
+      setAttended={setAttended}
     /> 
   );
 };
