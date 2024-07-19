@@ -30,6 +30,21 @@ const EmployeeList = ({attended, setAttended}) => {
     });
   };
 
+  const handleInput = (e) => {
+    if (e.target.value === "") {
+      setFilteredEmployees(null);
+      return;
+    }
+    const filteredEmployees = employees.filter((employee) =>
+      employee[e.target.name].toLowerCase().startsWith(e.target.value)
+    );
+    if (filteredEmployees.length === 0) {
+      setFilteredEmployees(null);
+      return;
+    }
+    setFilteredEmployees(filteredEmployees);
+  };
+
   useEffect(() => {
     fetchEmployees()
       .then((employees) => {
@@ -120,11 +135,11 @@ const EmployeeList = ({attended, setAttended}) => {
     <TablePagination
       employees={path === "/missing" ? missings : filteredEmployees ? filteredEmployees : employees}
       onDelete={handleDelete}
-      setFilteredEmployees={setFilteredEmployees}
       setOrderBy={setOrderBy}
       attended={attended}
       setAttended={setAttended}
       setMissings={setMissings}
+      handleInput={handleInput}
     /> 
   );
 };

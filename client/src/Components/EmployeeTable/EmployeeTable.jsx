@@ -2,21 +2,8 @@ import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 import { useState } from "react";
 
-const EmployeeTable = ({ employees, onDelete, setFilteredEmployees, setOrderBy, attended, setAttended, setMissings }) => {
+const EmployeeTable = ({ employees, onDelete, setOrderBy, attended, setAttended, setMissings, handleInput }) => {
   const [search, setSearch] = useState(null)
-
-  const handleInput = (e) => {
-    if (e.target.value === '') {
-      setFilteredEmployees(null)
-      return
-    }
-    const filteredEmployees = employees.filter(employee => employee[e.target.name].toLowerCase().startsWith(e.target.value))
-    if (filteredEmployees.length === 0) {
-      setFilteredEmployees(null)
-      return
-    }
-    setFilteredEmployees(filteredEmployees)
-  }
 
   const handleChange = (e) => {
     const value = e.target.value

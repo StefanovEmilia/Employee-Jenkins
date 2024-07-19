@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import EmployeeTable from "../EmployeeTable/EmployeeTable"
 
-const TablePagination = ({ employees, onDelete, setFilteredEmployees, setOrderBy, attended, setAttended, setMissings}) => {
+const TablePagination = ({ employees, onDelete, handleInput, setOrderBy, attended, setAttended, setMissings}) => {
     const [currentPageNumber, setCurrentPageNumber] = useState(1);
     const [dataToDisplay, setDataToDisplay] = useState([]);
     const TOTAL_VALUES_PER_PAGE = 10;
@@ -17,7 +17,7 @@ const TablePagination = ({ employees, onDelete, setFilteredEmployees, setOrderBy
         <EmployeeTable
           employees={dataToDisplay}
           onDelete={onDelete}
-          setFilteredEmployees={setFilteredEmployees}
+          handleInput={handleInput}
           setOrderBy={setOrderBy}
           attended={attended}
           setAttended={setAttended}
