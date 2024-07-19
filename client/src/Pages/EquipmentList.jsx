@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
 import EquipmentTable from "../Components/EquipmentTable";
+import TablePagination from "../Components/TablePagination";
 
 const fetchEquipments = () => {
   return fetch("/api/equipments").then((res) => res.json());
@@ -36,7 +37,7 @@ const EquipmentList = () => {
   }
 
   return (
-    <EquipmentTable equipments={equipments} onDelete={handleDelete}/>
+    <TablePagination equipments={equipments} onDelete={handleDelete}/>
   );
 };
 
