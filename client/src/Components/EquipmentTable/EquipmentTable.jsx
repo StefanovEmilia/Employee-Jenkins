@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import "../EmployeeTable/EmployeeTable.css";
+import { useState } from "react";
+import ConfirmPopup from "../ConfirmPopup";
 
-const EquipmentTable = ({equipments, onDelete, }) => {
-    return (
+const EquipmentTable = ({ equipments, onDelete, }) => {
+  const [deleteEquipment, setDeleteEquipment] = useState(null)
+
+  return (
+    <>
+      {deleteEquipment && <ConfirmPopup onDelete={deleteEquipment.onDelete} id={deleteEquipment.id } setDeleteEquipment={setDeleteEquipment}/>}
       <div className="EmployeeTable">
         <table>
           <thead>
@@ -10,8 +16,7 @@ const EquipmentTable = ({equipments, onDelete, }) => {
               <th>Name</th>
               <th>Type</th>
               <th>Amount</th>
-              <th>
-              </th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -24,7 +29,7 @@ const EquipmentTable = ({equipments, onDelete, }) => {
                   <Link to={`/equipments/update/${equipment._id}`}>
                     <button type="button">Update</button>
                   </Link>
-                  <button type="button" onClick={() => onDelete(equipment._id)}>
+                  <button type="button" onClick={() => setDeleteEquipment({onDelete:onDelete, id:equipment._id})}>
                     Delete
                   </button>
                 </td>
@@ -33,7 +38,8 @@ const EquipmentTable = ({equipments, onDelete, }) => {
           </tbody>
         </table>
       </div>
-    );
+    </>
+  );
 }
 
 export default EquipmentTable

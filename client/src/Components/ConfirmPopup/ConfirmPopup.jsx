@@ -1,16 +1,16 @@
-const ConfirmPopup = ({ onDelete, id, setDeleteEmployee }) => {
+const ConfirmPopup = ({ onDelete, id, setDeleteEmployee, setDeleteEquipment }) => {
   return (
     <div>
       Are you sure?
       <button
         onClick={() => {
-          setDeleteEmployee(null);
+          setDeleteEmployee ? setDeleteEmployee(null) : setDeleteEquipment(null);
           onDelete(id);
         }}
       >
         Delete
       </button>
-      <button onClick={() => setDeleteEmployee(null)}>Cancel</button>
+      <button onClick={() => setDeleteEmployee ? setDeleteEmployee(null) : setDeleteEquipment(null)}>Cancel</button>
     </div>
   );
 };
