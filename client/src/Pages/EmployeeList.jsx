@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
 import TablePagination from "../Components/TablePagination";
 import { useLocation } from "react-router-dom";
+import { useAttendance } from "../AttendanceContext";
 
 const fetchEmployees = () => {
   return fetch("/api/employees").then((res) => res.json());
@@ -13,12 +14,13 @@ const deleteEmployee = (id) => {
   );
 };
 
-const EmployeeList = ({attended, setAttended}) => {
+const EmployeeList = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
   const [filteredEmployees, setFilteredEmployees] = useState(null)
   const [orderBy, setOrderBy] = useState(null)
-  const [missings, setMissings] = useState([])
+  const [missings, setMissings] = useState(null)
+  const {attended, setAttended} = useAttendance()
   const location = useLocation()
   const path = location.pathname
 
@@ -118,13 +120,10 @@ const EmployeeList = ({attended, setAttended}) => {
   }, [orderBy])
 
   useEffect(() => {
-    console.log(path)
     if (path === "/missing") {
       const missingPeople = employees?.filter((employee) => !attended.includes(employee._id));
       setMissings(missingPeople);
-    } else {
-      setMissings([]);
-    }
+    } 
   }, [path, employees, attended])
 
   if (loading) {
@@ -133,7 +132,7 @@ const EmployeeList = ({attended, setAttended}) => {
 
   return ( 
     <TablePagination
-      employees={path === "/missing" ? missings : filteredEmployees ? filteredEmployees : employees}
+      employees={path === "/missing" && missings ? missings : filteredEmployees ? filteredEmployees : employees}
       onDelete={handleDelete}
       setOrderBy={setOrderBy}
       attended={attended}

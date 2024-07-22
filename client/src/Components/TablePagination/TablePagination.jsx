@@ -11,12 +11,12 @@ const TablePagination = ({ employees, equipments, onDelete, handleInput, setOrde
     const isEquipmentRoute = location.pathname.startsWith("/equipment")
     const length = isEquipmentRoute ? equipments.length : employees.length
 
-    useEffect(() => {
+  useEffect(() => {
         const startIndex = currentPageNumber === 1 ? 0 : (currentPageNumber - 1) * TOTAL_VALUES_PER_PAGE;
         const endIndex = startIndex + TOTAL_VALUES_PER_PAGE;
         isEquipmentRoute
-          ? setDataToDisplay(equipments.slice(startIndex, endIndex))
-          : setDataToDisplay(employees.slice(startIndex, endIndex));
+          ? setDataToDisplay(equipments?.slice(startIndex, endIndex))
+          : setDataToDisplay(employees?.slice(startIndex, endIndex));
     }, [employees, equipments, currentPageNumber])
 
     return (

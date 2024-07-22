@@ -10,7 +10,7 @@ const EmployeeTable = ({ employees, onDelete, setOrderBy, attended, setAttended,
   const handleChange = (e) => {
     const value = e.target.value
     setAttended(prev => prev.includes(value) ? prev.filter(id => id !== value) : [...prev, value])
-    setMissings((prev) => prev.filter((id) => id !== value));
+    setMissings((prev) => prev?.filter((id) => id !== value));
   }
   
   return (
