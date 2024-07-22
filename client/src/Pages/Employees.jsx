@@ -31,7 +31,7 @@ const Employees = () => {
     return (
       <div>
         <div class="employees">
-          {employees && Array.isArray(employees) ? (
+          {employees && Array.isArray(employees) && employees.length > 0 ? (
             employees.map((employee) => <EmployeeData key={employee._id } employee={employee} />)
           ) : (
             <ErrorPage search={search} />
