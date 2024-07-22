@@ -11,13 +11,8 @@ const EmployeeData = ({ employee }) => {
         const fetchEquipments = async () => {
             if (employee.equipments && employee.equipments.length > 0) {
             setEquipmentLoading(true)
-            const equipmentPromises = employee.equipments.map(
-              async (equipmentId) => {
-                const response = await fetch(`/api/equipments/${equipmentId}`);
-                return response.json();
-              }
-            );
-            const fetchedEquipments = await Promise.all(equipmentPromises);
+            const response = await fetch(`/api/employees/${employee._id}/equipments`)
+            const fetchedEquipments = await response.json();
             setEquipments(fetchedEquipments);
             setEquipmentLoading(false)
           }

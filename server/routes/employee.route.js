@@ -21,6 +21,20 @@ router.get("/superheroes", async (req, res, next) => {
     } 
 });
 
+router.get("/:id/equipments", async (req, res, next) => {
+  try {
+    const employee = await eQueries.getEmployeeById(req.params.id)
+    const equipments = await eQueries.getOwnedEquipments(employee)
+    res.json(equipments)
+  } catch (err) {
+    req.errorMessage = {
+      message: "Error during equipment fetch",
+      error: err
+    }
+    next()
+  }
+})
+
 router.get("/:id", async (req, res, next) => {
     try {
         const employee = await eQueries.getEmployeeById(req.params.id);

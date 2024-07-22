@@ -31,3 +31,9 @@ export async function updateEmployee(id, data) {
 export async function deleteEmployee(id) {
     return await Employee.findByIdAndDelete(id)
 }
+
+//instead fetching from the frontend by id
+export async function getOwnedEquipments(employee) {
+    const populatedEmployee = await employee.populate("equipments")
+    return populatedEmployee.equipments;
+}
