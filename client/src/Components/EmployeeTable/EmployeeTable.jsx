@@ -96,6 +96,9 @@ const EmployeeTable = ({ employees, onDelete, setOrderBy, attended, setAttended,
                     />
                   </td>
                   <td>
+                    <Link to={`/worklogs/${employee._id}`}>
+                      <button type="button">List worklogs</button>
+                    </Link>
                     <Link to={`/update/${employee._id}`}>
                       <button type="button">Update</button>
                     </Link>

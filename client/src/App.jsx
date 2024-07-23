@@ -13,6 +13,7 @@ import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import Employees from "./Pages/Employees";
+import WorkLogList from "./Pages/WorkLogList"
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <EmployeeUpdater />,
+      },
+      {
+        path: "/worklogs/:id",
+        element: <WorkLogList/>
       },
       {
         path: "/table-test",
