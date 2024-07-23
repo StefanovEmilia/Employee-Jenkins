@@ -17,6 +17,7 @@ const EmployeeSchema = new Schema({
       ref: "Equipment",
     },
   ],
+  worklog: []
 });
 
 export default model("Employee", EmployeeSchema);

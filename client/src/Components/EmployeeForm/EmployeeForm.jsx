@@ -5,6 +5,9 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, eqlist }) => {
   const [level, setLevel] = useState(employee?.level ?? "");
   const [position, setPosition] = useState(employee?.position ?? "");
   const [equipments, setEquipments] = useState(employee?.equipments ?? [])
+  const [worklogs, setWorklogs] = useState(employee?.worklog ?? [])
+  const [workingHours, setWorkingHours] = useState(null)
+  const [label, setLabel] = useState(null)
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +18,11 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, eqlist }) => {
         name,
         level,
         position,
-        equipments
+        equipments,
+        worklog: [
+          ...employee.worklog,
+          { workinghours: workingHours, workingLabel: label },
+        ],
       });
     }
 
@@ -23,7 +30,8 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, eqlist }) => {
       name,
       level,
       position,
-      equipments
+      equipments,
+      worklog: [{ workinghours: workingHours, workingLabel: label }],
     });
   };
 
@@ -68,10 +76,32 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel, eqlist }) => {
         />
       </div>
 
+      <div>
+        <label>Add a worklog!</label>
+        <label htmlFor="hours">Working hours:</label>
+        <input
+          id="hours"
+          type="number"
+          onChange={(e) => {
+            setWorkingHours(e.target.value);
+          }}
+        />
+        <label htmlFor="label">Working label:</label>
+        <input
+          id="label"
+          type="text"
+          onChange={(e) => {
+            setLabel(e.target.value);
+          }}
+        />
+      </div>
+
       <div className="control">
         {eqlist.map((eq) => (
           <div key={eq._id}>
-            <label htmlFor={eq._id}>{eq.name} ({eq.type})</label>
+            <label htmlFor={eq._id}>
+              {eq.name} ({eq.type})
+            </label>
             <input
               value={eq._id}
               onChange={handleEquipmentChange}
