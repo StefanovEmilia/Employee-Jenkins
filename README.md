@@ -9,7 +9,7 @@ npm install
 ```
 
 ### .env file
-Copy the .env.sample as .env and fill up the environment variable for your personal mongodb connecttion url.
+Create .env file and put `MONGO_URL` variable with your connection string in it. 
 
 ### Prepare the database
 
@@ -18,9 +18,9 @@ cd ./server
 npm run populate
 ```
 
-**populate command** will run the populate.js file as a script and it will generate a buch of starter data for your database. 
+**populate command** will run the populate.js file as a script and it will generate a bunch of starter data for your database. 
 
-### Running the code
+### Running the code (at developing phase)
 
 ```bash
 cd ./server
@@ -28,6 +28,15 @@ npm run dev
 ```
 
 It will start the server with nodemon. So it will watch the changes and restart the server if some ot the files changed.
+
+### Running the code (at production)
+
+```bash
+cd ./server
+npm start
+```
+
+It will start the server with node.
 
 ### Testing with test.http
 
@@ -44,15 +53,10 @@ cd ./client
 npm install
 ```
 
-### Proxy
-
-Watch for the port of your rest api. By default it will bind on port 8080 and the frontend proxy settings also depend on this configuration. If you for some reasons change the port of the backend, don't forget to change the ./client/vite.config.js proxy settings as well.
-
-### Runnig the code
-
+### Build the project
 ```bash
 cd ./client
-npm run dev
+npm run build
 ```
 
-And Vite will start your frontend on the 5173 port and you can visit the http://localhost:5173 on your preferred browser.
+This will build your project and creates **dist** folder for your frontend. Do not rename it since the **server.js** file looks after this directory to serve the frontend routes!
