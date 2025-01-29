@@ -1,7 +1,5 @@
 pipeline {
-    agent any {
-        docker {image 'node:16'}
-    }
+    agent any
 
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
