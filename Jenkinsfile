@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:16' }
+    }
 
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
@@ -12,6 +14,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir('client') {
+                    sh 'npm install'
                     sh 'npm run build'
                 }
             }
