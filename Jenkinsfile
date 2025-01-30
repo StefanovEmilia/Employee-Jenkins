@@ -8,6 +8,11 @@ pipeline {
         AWS_REGION            = credentials('AWS_REGION')
     }
 
+    tools {
+        nodejs 'NodeJs'
+        docker 'Docker'
+    }
+
     stages {
         stage('Build Frontend') {
             steps {
