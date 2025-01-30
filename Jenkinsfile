@@ -4,8 +4,6 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_ACCOUNT_ID        = credentials('AWS_ACCOUNT_ID')
-        AWS_REGION            = credentials('AWS_REGION')
     }
 
     tools {
@@ -33,13 +31,13 @@ pipeline {
             steps {
                  sh """
                     # Authenticate Docker to AWS ECR
-                    aws ecr get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com
+                    aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 794038210581.dkr.ecr.eu-central-1.amazonaws.com
 
                     # Tag the Docker image with the ECR repository URL
-                    docker tag employee-madness:"$BUILD_ID" "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/employee-madness:"$BUILD_ID"
+                    docker tag employee-madness:"${env.BUILD_ID}" 794038210581.dkr.ecr.eu-central-1.amazonaws.com/employee-madness:"${env.BUILD_ID}"
 
                     # Push the Docker image to ECR
-                    docker push "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/employee-madness:"$BUILD_ID"
+                    docker push 794038210581.dkr.ecr.eu-central-1.amazonaws.com/employee-madness:"${env.BUILD_ID}"
                     """    
             }
         }
