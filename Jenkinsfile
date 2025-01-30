@@ -33,13 +33,13 @@ pipeline {
             steps {
                  sh """
                     # Authenticate Docker to AWS ECR
-                    aws ecr get-login-password --region ${env.AWS_REGION} | docker login --username AWS --password-stdin ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com
+                    aws ecr get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com
 
                     # Tag the Docker image with the ECR repository URL
-                    docker tag employee-madness:${BUILD_ID} ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com/employee-madness:${BUILD_ID}
+                    docker tag employee-madness:"$BUILD_ID" "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/employee-madness:"$BUILD_ID"
 
                     # Push the Docker image to ECR
-                    docker push ${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com/employee-madness:${env.BUILD_ID}
+                    docker push "$AWS_ACCOUNT_ID".dkr.ecr."$AWS_REGION".amazonaws.com/employee-madness:"$BUILD_ID"
                     """    
             }
         }
