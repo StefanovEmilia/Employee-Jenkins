@@ -4,6 +4,8 @@ This project was primarily developed during my studies in the web module. It sho
 
 On the DevOps side, I focused on deployment with CI/CD pipeline integration using `Dockerfile` and `Jenkinsfile`.
 
+The aim of the usage of Dockerfile and Jenkinsfile is to create a docker image and push it to a private AWS ECR. When Jenkins runs the Jenkinsfile, it will build the frontend, the docker image, and push it to the corresponding ECR.
+
 ## Client side
 
 ### Install dependencies
