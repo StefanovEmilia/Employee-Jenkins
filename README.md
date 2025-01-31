@@ -6,6 +6,13 @@ On the DevOps side, I focused on deployment with CI/CD pipeline integration usin
 
 The aim of the usage of Dockerfile and Jenkinsfile is to create a docker image and push it to a private AWS ECR. When Jenkins runs the Jenkinsfile, it will build the frontend, the docker image, and push it to the corresponding ECR.
 
+# How to RUN the web application
+
+## Prerequisites
+- NodeJS installed version 20.11.1 or higher
+- NPM installed version 10.2.4 or higher
+- Existing MondoDB database
+
 ## Client side
 
 ### Install dependencies
@@ -51,6 +58,7 @@ npm start
 ```
 
 It will start the server with node.
+The webpage will be available at http://localhost/8081
 
 ### Testing with test.http
 
