@@ -21,6 +21,21 @@ pipeline {
                 }
             }
         }
+        stage('Test HTTP Endpoints') {
+            steps {
+                dir('server') {
+                    sh 'npm install'
+                    sh 'npm start & echo $! > server.pid'
+                }
+
+                sh 'npm install -g httpyac'
+                sh 'httpyac test.http'
+
+                dir('server') {
+                    sh 'kill $(cat server.pid)'
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 dir('server') {
