@@ -13,11 +13,14 @@ Content-Type: application/json
   "position": "Joker"
 }
 
-### Save the new employee's id:
-@id = {{create_employee.response.body._id}}
+# Save the employee's id:
+{{
+  $global.id=response.parsedBody._id
+}}
+
 
 ###
-PATCH {{baseUrl}}/employees/{{id}}
+PATCH {{baseUrl}}/employees/{{$global.id}}
 Content-Type:  application/json
 
 {
@@ -25,5 +28,5 @@ Content-Type:  application/json
 }
 
 ###
-DELETE {{baseUrl}}/employees/{{id}}
+DELETE {{baseUrl}}/employees/{{$global.id}}
 
