@@ -28,6 +28,8 @@ pipeline {
                     sh 'npm start & echo $! > server.pid'
                 }
 
+                sh 'sleep 5'
+
                 sh 'npm install -g httpyac'
                 sh 'httpyac test.http'
 
