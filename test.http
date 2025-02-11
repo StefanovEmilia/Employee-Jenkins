@@ -1,7 +1,10 @@
-GET http://localhost:8081/api/employees/
+@baseUrl = http://localhost:8081/api
+
+GET {{baseUrl}}/employees/
 
 ###
-POST http://localhost:8081/api/employees/
+# @name create_employee
+POST {{baseUrl}}/employees/
 Content-Type: application/json
 
 {
@@ -10,13 +13,17 @@ Content-Type: application/json
   "position": "Joker"
 }
 
-###
-DELETE http://localhost:8081/api/employees/63fc6e4bca1cb463caa21779
+### Save the new employee's id:
+@id = {{create_employee.response.body._id}}
 
 ###
-PATCH http://localhost:8081/api/employees/63fc6e4bca1cb463caa21779
+PATCH {{baseUrl}}/employees/{{id}}
 Content-Type:  application/json
 
 {
   "name": "asd"
 }
+
+###
+DELETE {{baseUrl}}/employees/{{id}}
+
