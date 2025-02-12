@@ -25,7 +25,7 @@ pipeline {
             steps {
                 dir('server') {
                     sh 'npm install'
-                    sh 'npm start & echo $! > server.pid'
+                    sh 'npm start & sleep 2 && pgrep -P $(pgrep -f "sh -c node server.js") > server.pid'
                 }
                 script {
                     def isRunning = false
@@ -50,7 +50,7 @@ pipeline {
                 }
 
                 sh 'npm install -g httpyac'
-                sh 'httpyac test.http'
+                sh 'httpyac test.http --all'
 
                 dir('server') {
                     sh 'kill $(cat server.pid)'
