@@ -27,8 +27,27 @@ pipeline {
                     sh 'npm install'
                     sh 'npm start & echo $! > server.pid'
                 }
-
-                sh 'sleep 5'
+                script {
+                    def isRunning = false
+                    def maxRetries = 10 
+                    def attempts = 0
+    
+                    while (!isRunning && attempts < maxRetries) {
+                        def process = sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:8081/', returnStdout: true).trim()
+                        if (process == "200") {
+                            isRunning = true
+                            echo "Server is up and running!"
+                        } else {
+                            echo "Server not ready yet, retrying in 2 seconds..."
+                            sleep 2
+                        }
+                        attempts++
+                    }
+                    
+                    if (!isRunning) {
+                        error "Server did not start within expected time!"
+                    }
+                }
 
                 sh 'npm install -g httpyac'
                 sh 'httpyac test.http'
