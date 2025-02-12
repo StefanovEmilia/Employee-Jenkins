@@ -42,7 +42,7 @@ app.get("*", (req, res, next) => {
 const main = async () => {
   await connect(MONGO_URL);
 
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     console.log("App is listening on 8081");
     console.log("Try /api/employees route right now");
   });

@@ -21,6 +21,42 @@ pipeline {
                 }
             }
         }
+        stage('Test HTTP Endpoints') {
+            steps {
+                dir('server') {
+                    sh 'npm install'
+                    sh 'npm start & sleep 2 && pgrep -P $(pgrep -f "sh -c node server.js") > server.pid'
+                }
+                script {
+                    def isRunning = false
+                    def maxRetries = 10 
+                    def attempts = 0
+    
+                    while (!isRunning && attempts < maxRetries) {
+                        def process = sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://localhost:8081/', returnStdout: true).trim()
+                        if (process == "200") {
+                            isRunning = true
+                            echo "Server is up and running!"
+                        } else {
+                            echo "Server not ready yet, retrying in 2 seconds..."
+                            sleep 2
+                        }
+                        attempts++
+                    }
+                    
+                    if (!isRunning) {
+                        error "Server did not start within expected time!"
+                    }
+                }
+
+                sh 'npm install -g httpyac'
+                sh 'httpyac test.http --all'
+
+                dir('server') {
+                    sh 'kill $(cat server.pid)'
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 dir('server') {
