@@ -30,3 +30,6 @@ Content-Type:  application/json
 ###
 DELETE {{baseUrl}}/employees/{{$global.id}}
 
+### Test if this will break the pipeline or not
+GET {{baseUrl}}/wrongPath
+
